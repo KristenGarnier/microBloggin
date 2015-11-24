@@ -14,9 +14,17 @@ var storeMethods = {
         arr.filter(function(item){
             return currIds.indexOf(item.cid) === -1;
         }).forEach(this.add.bind(this));
+
+        this.sort();
     },
     add: function(item){
         this._data.push(item);
+        this.sort();
+    },
+    sort: function(){
+        this._data.sort(function(a,b){
+            return +new Date(b.$created) - +new Date(a.$created);
+        });
     },
     all: function(){
         return this._data;
@@ -36,11 +44,10 @@ var storeMethods = {
         this.emit(CHANGE_EVENT);
     },
     bind: function (actionType, actionFn) {
-
         if (this.actions[actionType]){
             this.actions[actionType].push(actionFn);
         } else {
-            this.actions[actionType]= [actionFn];
+            this.actions[actionType] = [actionFn];
         }
     }
 };
@@ -48,7 +55,15 @@ var storeMethods = {
 exports.extend = function(methods){
     var store = {
         _data:[],
-        actions: []
+        actions: [],
+        mixin: {
+            componentDidMount: function () {
+                store.addChangeListener(this.onChange);
+            },
+            componentWillUnmount: function () {
+                store.removeChangeListener(this.onChange);
+            }
+        }
     };
 
     assign(store, EventEmitterProto, storeMethods, methods);
@@ -59,6 +74,7 @@ exports.extend = function(methods){
         if(store.actions[action.actionType]){
             store.actions[action.actionType].forEach(function(fn){
                 fn.call(store, action.data);
+                store.emitChange();
             });
         }
     });

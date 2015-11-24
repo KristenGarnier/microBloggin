@@ -1,0 +1,27 @@
+.chirp{
+    list-style: none;
+    padding: 6px;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+}
+
+.chirp p {
+    margin-bottom: 0;
+}
+
+.chirp img {
+    display: none;
+}
+
+@media (min-width: 550px) {
+    .chirp img {
+        display: block;
+        border-radius: 4px;
+        width: 100%;
+    }
+}
+
+.timestamp {
+    color: #d1d1d1;
+    margin-left: 0.5rem;
+}
