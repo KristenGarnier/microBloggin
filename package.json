@@ -23,11 +23,16 @@
     "body-parser": "^1.14.1",
     "cookie-parser": "^1.4.0",
     "ejs": "^2.3.4",
+    "event": "^1.0.0",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
+    "flux": "^2.1.1",
     "locallydb": "0.0.9",
+    "object-assign": "^4.0.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react": "^0.13.3",
+    "react-router": "^0.13.5"
   }
 }

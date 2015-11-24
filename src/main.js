@@ -1,4 +1,4 @@
-var events = require('events');
+var API = require('./api');
+var ChirpStore = require('./stores/chripsStore');
 
-console.log('heel');
-console.log(events);
+API.fetchChirps();
